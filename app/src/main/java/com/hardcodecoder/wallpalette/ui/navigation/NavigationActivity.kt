@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.hardcodecoder.wallpalette.ui.theme.WallpaletteTheme
 
 class NavigationActivity : ComponentActivity() {
 
@@ -12,7 +13,9 @@ class NavigationActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            NavigationScreen()
+            WallpaletteTheme {
+                NavigationScreen()
+            }
         }
     }
 }

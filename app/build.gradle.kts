@@ -1,12 +1,21 @@
+import java.nio.file.Files
+import java.nio.file.Path
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.compose.compiler)
     alias(libs.plugins.jetbrains.kotlin)
 }
 
+private fun retrieveApiKey() = Files.readString(Path.of("$rootDir${File.separator}secrets"))
+
 android {
     namespace = "com.hardcodecoder.wallpalette"
     compileSdk = 35
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.hardcodecoder.wallpalette"
@@ -14,6 +23,8 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "0.0.1"
+
+        buildConfigField(type = "String", name = "API_KEY", value = "\"${retrieveApiKey()}\"")
     }
 
     buildTypes {

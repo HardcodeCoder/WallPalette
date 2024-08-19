@@ -5,13 +5,13 @@ import com.hardcodecoder.wallpalette.domain.model.Photo
 interface PhotoRepository {
 
     suspend fun getLatestPhotos(
-        photosPerPage: Int = 50,
+        photosPerPage: Int = 30,
         page: Int = 1
     ): List<Photo>
 
     suspend fun searchPhotos(
         query: String,
-        resultPerPage: Int = 50,
+        resultPerPage: Int = 30,
         page: Int = 1
     ): List<Photo>
 }

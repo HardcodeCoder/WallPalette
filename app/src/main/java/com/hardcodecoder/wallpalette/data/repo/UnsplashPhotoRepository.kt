@@ -42,7 +42,7 @@ class UnsplashPhotoRepository(
                 query = query,
                 resultPerPage = resultPerPage,
                 page = page
-            ).map { it.toPhoto() }
+            ).results.map { it.toPhoto() }
             Result.Success(data)
         } catch (httpException: HttpException) {
             Result.Error(httpException.code(), httpException.cause)

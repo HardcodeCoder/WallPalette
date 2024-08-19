@@ -1,6 +1,7 @@
 package com.hardcodecoder.wallpalette.data.remote
 
 import com.hardcodecoder.wallpalette.data.model.UnsplashPhoto
+import com.hardcodecoder.wallpalette.data.model.UnsplashSearchResult
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,5 +18,5 @@ interface UnsplashPhotoService {
         @Query("query") query: String,
         @Query("per_page") resultPerPage: Int,
         @Query("page") page: Int
-    ): List<UnsplashPhoto>
+    ): UnsplashSearchResult
 }

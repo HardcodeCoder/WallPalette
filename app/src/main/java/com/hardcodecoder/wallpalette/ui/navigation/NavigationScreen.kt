@@ -56,8 +56,11 @@ fun NavigationScreen() {
                 destinations = destinations
             ) { destination ->
                 navController.navigate(destination.id) {
-                    popUpTo(navController.graph.findStartDestination().id)
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
                     launchSingleTop = true
+                    restoreState = true
                 }
             }
         }

@@ -15,7 +15,7 @@ fun HomeScreen(
     PaginatedLazyPhotoGrid(
         modifier = modifier.fillMaxSize(),
         data = viewModel.photos.collectAsState(),
-        onReachedEnd = { viewModel.updateScrollPosition(it) }
+        scrollPositionChanged = { viewModel.updateScrollPosition(it) }
     ) {
     }
 }

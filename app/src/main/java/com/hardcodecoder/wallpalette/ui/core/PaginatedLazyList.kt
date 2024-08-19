@@ -38,7 +38,7 @@ import kotlin.random.Random
 fun PaginatedLazyPhotoGrid(
     modifier: Modifier = Modifier,
     data: State<List<Photo>>,
-    onReachedEnd: (Int) -> Unit,
+    scrollPositionChanged: (Int) -> Unit,
     onClick: (Photo) -> Unit
 ) {
     val listState = rememberLazyStaggeredGridState()
@@ -66,7 +66,7 @@ fun PaginatedLazyPhotoGrid(
         snapshotFlow { listState.layoutInfo.visibleItemsInfo }
             .debounce(500)
             .collectLatest {
-                onReachedEnd(it.lastOrNull()?.index ?: 0)
+                scrollPositionChanged(it.lastOrNull()?.index ?: 0)
             }
     }
 }
@@ -127,7 +127,7 @@ fun PaginatedLazyPhotoGridPreview() {
     }
     PaginatedLazyPhotoGrid(
         data = state,
-        onReachedEnd = {}
+        scrollPositionChanged = {}
     ) {
     }
 }

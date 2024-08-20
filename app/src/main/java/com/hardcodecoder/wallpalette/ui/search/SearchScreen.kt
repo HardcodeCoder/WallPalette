@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.hardcodecoder.wallpalette.R
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.ui.core.PaginatedLazyPhotoGrid
+import com.hardcodecoder.wallpalette.ui.core.PhotoDetailsBottomSheet
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -84,10 +86,21 @@ fun SearchView(
         active = true,
         onActiveChange = {}
     ) {
+        val showBottomSheet = remember { mutableStateOf(false) }
+        val photo = remember { mutableStateOf<Photo?>(null) }
+
         PaginatedLazyPhotoGrid(
             data = searchResult,
             scrollPositionChanged = { scrollPositionChanged(it) }
         ) {
+            photo.value = it
+            showBottomSheet.value = true
+        }
+
+        if (showBottomSheet.value && null != photo.value) {
+            PhotoDetailsBottomSheet(photo = photo.value!!) {
+                showBottomSheet.value = false
+            }
         }
     }
 }

@@ -6,12 +6,15 @@ import com.hardcodecoder.wallpalette.domain.model.Photo
 
 fun UnsplashPhoto.toPhoto() = Photo(
     id = id,
-    description = description ?: "",
+    description = description ?: altDescription ?: "",
+    width = width,
+    height = height,
     aspectRatio = getRoundedAspectRatio(width, height),
     blurHash = blurHash,
     color = Color.parseColor(color),
     thumbnailUrl = url.thumbUrl,
-    imageUrl = url.fullUrl
+    imageUrl = url.fullUrl,
+    likes = likes
 )
 
 // Returns aspect ratio rounded to one decimal place.

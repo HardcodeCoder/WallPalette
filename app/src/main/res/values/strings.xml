@@ -8,6 +8,11 @@
     <string name="clear">Clear</string>
     <string name="search_hint">Search photos</string>
 
+    <string name="photo_description">Description: %s</string>
+    <string name="photo_dimensions">Dimensions: %dw x %dh</string>
+    <string name="photo_likes">Likes: %d</string>
+    <string name="photo_color">Color: #%s</string>
+
     <string name="build_date">Crafted on: %s</string>
     <string name="settings_footer_text">Made with \u2764 in \uD83C\uDDEE\uD83C\uDDF3</string>
 </resources>

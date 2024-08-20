@@ -21,17 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.hardcodecoder.wallpalette.domain.model.Photo
+import com.hardcodecoder.wallpalette.ui.randomPhoto
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
-import kotlin.random.Random
 
 @OptIn(FlowPreview::class)
 @Composable
@@ -106,25 +105,9 @@ fun PhotoGridItem(
 )
 @Composable
 fun PaginatedLazyPhotoGridPreview() {
-    val data = MutableList(10) {
-        Photo(
-            Random.nextInt().toString(),
-            "",
-            Random.nextFloat() * 1.5f,
-            "",
-            Color(
-                red = Random.nextInt(until = 255),
-                green = Random.nextInt(until = 255),
-                blue = Random.nextInt(until = 255),
-                alpha = 255
-            ).toArgb(),
-            "",
-            ""
-        )
-    }.toList()
-    val state = remember {
-        mutableStateOf(data)
-    }
+    val data = MutableList(10) { randomPhoto() }.toList()
+    val state = remember { mutableStateOf(data) }
+
     PaginatedLazyPhotoGrid(
         data = state,
         scrollPositionChanged = {}

@@ -1,11 +1,18 @@
 import java.nio.file.Files
 import java.nio.file.Path
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.compose.compiler)
     alias(libs.plugins.jetbrains.kotlin)
 }
+
+private fun buildTime() =
+    DateTimeFormatter.ofPattern("EEE, MMM d, yyyy, HH:mm:ss")
+        .format(LocalDateTime.now(ZoneOffset.UTC))
 
 private fun retrieveApiKey() = Files.readString(Path.of("$rootDir${File.separator}secrets"))
 
@@ -25,6 +32,7 @@ android {
         versionName = "0.0.1"
 
         buildConfigField(type = "String", name = "API_KEY", value = "\"${retrieveApiKey()}\"")
+        buildConfigField(type = "String", name = "BUILD_DATE_TIME", value = "\"${buildTime()}\"")
     }
 
     buildTypes {

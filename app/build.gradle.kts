@@ -30,8 +30,8 @@ android {
         applicationId = "com.hardcodecoder.wallpalette"
         minSdk = 26
         targetSdk = 35
-        versionCode = 100
-        versionName = "1.0.0"
+        versionCode = 101
+        versionName = "1.0.1"
 
         buildConfigField(type = "String", name = "API_KEY", value = "\"${retrieveApiKey()}\"")
         buildConfigField(type = "String", name = "BUILD_DATE_TIME", value = "\"${buildTime()}\"")

@@ -6,16 +6,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.ui.core.PaginatedLazyPhotoGrid
 import com.hardcodecoder.wallpalette.ui.core.PhotoDetailsBottomSheet
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
-    val viewModel = koinViewModel<HomeViewModel>()
+    val viewModel = hiltViewModel<HomeViewModel>()
     val showBottomSheet = remember { mutableStateOf(false) }
     val photo = remember { mutableStateOf<Photo?>(null) }
 

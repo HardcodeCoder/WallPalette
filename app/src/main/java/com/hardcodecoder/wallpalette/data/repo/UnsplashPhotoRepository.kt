@@ -9,8 +9,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class UnsplashPhotoRepository(
+class UnsplashPhotoRepository @Inject constructor(
     private val unsplashPhotoService: UnsplashPhotoService,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : PhotoRepository {

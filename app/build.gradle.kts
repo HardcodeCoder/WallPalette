@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.compose.compiler)
     alias(libs.plugins.jetbrains.kotlin)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.dagger.hilt)
 }
 
 private fun buildTime() =
@@ -95,11 +97,10 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coil.compose)
 
-    // Koin - dependency injection library
-    implementation(platform(libs.koin.bom))
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
+    // Dagger Hilt - dependency injection
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.dagger.hilt.compiler)
 
     // Retrofit - for network io
     implementation(libs.retrofit)

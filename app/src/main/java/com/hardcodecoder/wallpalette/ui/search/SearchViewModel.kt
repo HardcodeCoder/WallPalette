@@ -5,12 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.domain.model.Result
 import com.hardcodecoder.wallpalette.domain.repo.PhotoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val photoRepository: PhotoRepository
 ) : ViewModel() {
 

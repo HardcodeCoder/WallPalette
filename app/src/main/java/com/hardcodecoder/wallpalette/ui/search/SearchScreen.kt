@@ -19,17 +19,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.hardcodecoder.wallpalette.R
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.ui.core.PaginatedLazyPhotoGrid
 import com.hardcodecoder.wallpalette.ui.core.PhotoDetailsBottomSheet
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchScreen(
     modifier: Modifier = Modifier
 ) {
-    val viewModel = koinViewModel<SearchViewModel>()
+    val viewModel = hiltViewModel<SearchViewModel>()
     SearchView(
         modifier = modifier,
         searchResult = viewModel.searchResult.collectAsState(),

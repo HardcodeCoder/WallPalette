@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.domain.model.Result
-import com.hardcodecoder.wallpalette.domain.repo.PhotoRepository
+import com.hardcodecoder.wallpalette.domain.usecase.SearchPhotos
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val searchForPhotos: SearchPhotos
 ) : ViewModel() {
 
     private val _searchResult = MutableStateFlow(emptyList<Photo>())
@@ -44,7 +44,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun searchPhotosAsync(query: String, page: Int) {
-        val photosResult = photoRepository.searchPhotos(
+        val photosResult = searchForPhotos(
             query = query,
             page = page
         )

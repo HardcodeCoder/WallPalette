@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.domain.model.Result
-import com.hardcodecoder.wallpalette.domain.repo.PhotoRepository
+import com.hardcodecoder.wallpalette.domain.usecase.GetLatestPhotos
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val getLatestPhotos: GetLatestPhotos
 ) : ViewModel() {
 
     private val _photos = MutableStateFlow(emptyList<Photo>())
@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private suspend fun fetchPageAsync(page: Int) {
-        val photosResult = photoRepository.getLatestPhotos(
+        val photosResult = getLatestPhotos(
             page = page
         )
         when (photosResult) {

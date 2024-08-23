@@ -2,7 +2,7 @@ package com.hardcodecoder.wallpalette
 
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.domain.model.Result
-import com.hardcodecoder.wallpalette.domain.repo.PhotoRepository
+import com.hardcodecoder.wallpalette.domain.usecase.SearchPhotos
 import com.hardcodecoder.wallpalette.ui.randomPhoto
 import com.hardcodecoder.wallpalette.ui.search.SearchViewModel
 import io.mockk.coEvery
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SearchViewModelTest {
 
-    private val repo = mockk<PhotoRepository>()
+    private val searchPhotos = mockk<SearchPhotos>()
     private val data = MutableList(5) { randomPhoto() }
     private lateinit var viewModel: SearchViewModel
 
@@ -36,7 +36,7 @@ class SearchViewModelTest {
 
     @BeforeEach
     fun initViewModel() {
-        viewModel = SearchViewModel(repo)
+        viewModel = SearchViewModel(searchPhotos)
     }
 
     @Test
@@ -54,9 +54,8 @@ class SearchViewModelTest {
     @Test
     fun `Given a valid search query should return data`() = runTest {
         coEvery {
-            repo.searchPhotos(
+            searchPhotos.invoke(
                 query = eq("cars"),
-                resultPerPage = any(),
                 page = any()
             )
         } returns Result.Success(data)
@@ -75,9 +74,8 @@ class SearchViewModelTest {
     @Test
     fun `Given an invalid search query should not return data`() = runTest {
         coEvery {
-            repo.searchPhotos(
+            searchPhotos.invoke(
                 query = eq("invalid"),
-                resultPerPage = any(),
                 page = any()
             )
         } returns Result.Success(emptyList())

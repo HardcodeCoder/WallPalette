@@ -2,7 +2,7 @@ package com.hardcodecoder.wallpalette
 
 import com.hardcodecoder.wallpalette.domain.model.Photo
 import com.hardcodecoder.wallpalette.domain.model.Result
-import com.hardcodecoder.wallpalette.domain.repo.PhotoRepository
+import com.hardcodecoder.wallpalette.domain.usecase.GetLatestPhotos
 import com.hardcodecoder.wallpalette.ui.home.HomeViewModel
 import com.hardcodecoder.wallpalette.ui.randomPhoto
 import io.mockk.coEvery
@@ -25,7 +25,7 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class HomeViewModelTest {
 
-    private val repo = mockk<PhotoRepository>()
+    private val latestPhotos = mockk<GetLatestPhotos>()
     private val data = MutableList(5) { randomPhoto() }
     private lateinit var viewModel: HomeViewModel
 
@@ -33,8 +33,7 @@ class HomeViewModelTest {
     fun setUp() {
         Dispatchers.setMain(Dispatchers.Default)
         coEvery {
-            repo.getLatestPhotos(
-                photosPerPage = any(),
+            latestPhotos.invoke(
                 page = any()
             )
         } returns Result.Success(data)
@@ -42,7 +41,7 @@ class HomeViewModelTest {
 
     @BeforeEach
     fun initViewModel() {
-        viewModel = HomeViewModel(repo)
+        viewModel = HomeViewModel(latestPhotos)
     }
 
     @Test
